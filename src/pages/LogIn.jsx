@@ -1,18 +1,70 @@
-import React from 'react';
+import Lottie from 'lottie-react';
+import React, { use } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router';
+import loginLottie from "../assets/login-animation.json"
+import { AuthContext } from '../provider/AuthContext';
+import toast from 'react-hot-toast';
 
 const LogIn = () => {
+
+
+  const { login, signGoogle } = use(AuthContext)
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    const form = e.target
+
+    const email = form.email.value
+    const pass = form.password.value
+
+    login(email, pass)
+      .then(res => {
+
+        toast.success("Log in Successful!");
+        e.target.reset()
+
+
+      })
+      .catch(err => {
+
+        toast.error(err.message);
+
+
+      })
+
+  }
+
+  // log in with google 
+  const  handleGoogleLogin=()=>{
+
+signGoogle()
+.then(res=>{
+     toast.success("Login successful!");
+
+})
+.catch(err=>{
+
+
+  toast.error(err.message);
+
+
+})
+
+
+  }
+
+
   return (
-      <section className="min-h-screen flex items-center justify-center  px-4 py-[5%]">
+    <section className="min-h-screen flex items-center justify-center  px-4 py-[5%]">
       <div className="w-full max-w-md p-8 bg-white shadow-xl rounded-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#ff6d03] ">
           Login
         </h2>
 
-        <form 
-        // onSubmit={handleLogin} 
-        className="space-y-4 ">
+        <form
+          onSubmit={handleLogin}
+          className="space-y-4 ">
           <div>
             <label className="block text-gray-700 text-sm font-medium mb-1">
               Email
@@ -39,11 +91,11 @@ const LogIn = () => {
             />
           </div>
 
-        
+
 
           <div className="text-sm text-gray-600 text-right">
-            
-              Don't have an account?{" "}<Link to="/register">
+
+            Don't have an account?{" "}<Link to="/register">
               <span className="text-[#ff6d03] font-bold underline">Register</span>
             </Link>
           </div>
@@ -61,7 +113,7 @@ const LogIn = () => {
             Or login with
           </p>
           <button
-            // onClick={handleGoogleLogin}
+            onClick={handleGoogleLogin}
             className="w-full flex items-center justify-center gap-2 py-2 border border-[#ff7c47] rounded-md hover:bg-gray-100 transition"
           >
             <FcGoogle size={20} />
@@ -69,6 +121,22 @@ const LogIn = () => {
           </button>
         </div>
       </div>
+      <div className='hidden lg:block'>
+
+        <Lottie animationData={loginLottie}
+          loop
+          autoplay
+
+          className='w-80 max-h-full'
+        >
+
+
+
+        </Lottie>
+
+
+      </div>
+
     </section>
   );
 };
