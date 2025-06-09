@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react';
 import React from 'react';
 import error_lottie from "../assets/404_lottie.json"
-import { motion } from 'framer-motion';
+import { motion} from 'framer-motion';
 import { FaArrowLeft } from 'react-icons/fa';
 import { NavLink } from 'react-router';
 

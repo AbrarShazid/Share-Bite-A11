@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { NavLink } from "react-router";
+import { AuthContext } from "../provider/AuthContext";
+import toast from "react-hot-toast";
+import spinner from "../assets/loading_small.json"
+import Lottie from "lottie-react";
+
 
 const Navbar = () => {
+  const { user, logOut, loading } = use(AuthContext)
+
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+
+  const signOut = () => {
+
+    logOut()
+      .then(res => {
+
+        toast.success("Log Out Successful!")
+
+      })
+      .catch(err => {
+        toast.error("Something Went Wrong!!!")
+      })
+
+
+  }
+
+
+
 
   const navItemClass = ({ isActive }) =>
     isActive
@@ -26,14 +53,14 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <NavLink to={'/'}>
-            <div className="flex gap-2 items-center">
-          <img className="w-10 h-10 rounded-full" src="/Favicon.png" alt="Logo" />
-          <h1 className="font-bold text-2xl text-white">
-            ShareBite<span className="text-[#ff6d03] font-extrabold">.</span>
-          </h1>
-        </div>
+          <div className="flex gap-2 items-center">
+            <img className="w-10 h-10 rounded-full" src="/Favicon.png" alt="Logo" />
+            <h1 className="font-bold text-2xl text-white">
+              ShareBite<span className="text-[#ff6d03] font-extrabold">.</span>
+            </h1>
+          </div>
         </NavLink>
-      
+
 
         {/* Hamburger Icon */}
         <div className="lg:hidden">
@@ -50,9 +77,32 @@ const Navbar = () => {
         <div className="hidden lg:flex gap-7">{centerItem}</div>
 
         {/* Right Side (Auth Buttons) */}
-        <div className="hidden lg:flex gap-4">
-          <NavLink to="/login" className={navItemClass}>Login</NavLink>
-          <NavLink to="/register" className={navItemClass}>Register</NavLink>
+        <div className="hidden lg:flex ">
+
+
+
+
+          {
+            loading ? <Lottie animationData={spinner} className="h-[40px]"></Lottie> :
+              <div className="space-x-4">
+                {
+                  user ? <button onClick={signOut} >Log Out</button>
+                    :
+
+                    <>
+
+
+                      <NavLink to="/login" className={navItemClass}>Log In</NavLink>
+                      <NavLink to="/register" className={navItemClass}>Register</NavLink>
+
+                    </>
+                }
+              </div>
+          }
+
+
+
+
         </div>
       </div>
 
@@ -60,8 +110,18 @@ const Navbar = () => {
       {isOpen && (
         <div className="lg:hidden flex flex-col items-start gap-4 px-6 pb-4">
           {centerItem}
-          <NavLink to="/login" className={navItemClass}>Login</NavLink>
-          <NavLink to="/register" className={navItemClass}>Register</NavLink>
+
+          {
+            user ? <button onClick={signOut}>Log Out</button>
+              : <>
+                <NavLink to="/login" className={navItemClass}>Login</NavLink>
+                <NavLink to="/register" className={navItemClass}>Register</NavLink>
+
+
+              </>
+
+          }
+
         </div>
       )}
     </nav>
