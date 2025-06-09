@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router"; // corrected import
+import { NavLink } from "react-router";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,12 +25,15 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 backdrop-blur-md bg-black/40 text-white border-b border-white/10 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex gap-2 items-center">
+        <NavLink to={'/'}>
+            <div className="flex gap-2 items-center">
           <img className="w-10 h-10 rounded-full" src="/Favicon.png" alt="Logo" />
           <h1 className="font-bold text-2xl text-white">
             ShareBite<span className="text-[#ff6d03] font-extrabold">.</span>
           </h1>
         </div>
+        </NavLink>
+      
 
         {/* Hamburger Icon */}
         <div className="lg:hidden">
