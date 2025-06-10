@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '/public/Favicon.png'
+import logo from '../assets/Favicon.png'
 import toast from 'react-hot-toast';
 const Footer = () => {   
   
@@ -90,7 +90,7 @@ const Footer = () => {
 
                 <form onSubmit={newsLetter} className="mt-6">
                     <div>
-                        <label for="email" className="sr-only">Email</label>
+                        <label  className="sr-only">Email</label>
                         <input type="email" name="email" id="email" placeholder="Enter your email" className="block w-full p-3.5 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-500 rounded-md focus:outline-none focus:border-[#ff6d03] " />
                     </div>
 

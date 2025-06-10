@@ -4,6 +4,8 @@ import { AuthContext } from "../provider/AuthContext";
 import toast from "react-hot-toast";
 import spinner from "../assets/loading_small.json"
 import Lottie from "lottie-react";
+import dummyProfile from "../assets/dummy.jpg"
+import logo from "../assets/Favicon.png"
 
 
 const Navbar = () => {
@@ -54,7 +56,7 @@ const Navbar = () => {
         {/* Logo */}
         <NavLink to={'/'}>
           <div className="flex gap-2 items-center">
-            <img className="w-10 h-10 rounded-full" src="/Favicon.png" alt="Logo" />
+            <img className="w-10 h-10 rounded-full" src={logo} alt="Logo" />
             <h1 className="font-bold text-2xl text-white">
               ShareBite<span className="text-[#ff6d03] font-extrabold">.</span>
             </h1>
@@ -84,9 +86,20 @@ const Navbar = () => {
 
           {
             loading ? <Lottie animationData={spinner} className="h-[40px]"></Lottie> :
-              <div className="space-x-4">
+              <div className="space-x-4 ">
                 {
-                  user ? <button onClick={signOut} >Log Out</button>
+                  user ?
+                  <div className="flex gap-4">
+                    <img
+              src={user?.photoURL ? user.photoURL : dummyProfile}
+              alt={user?.displayName || "User"}
+              className="h-8 sm:h-9  w-8 sm:w-9 md:h-11  md:w-11 rounded-full border-2 border-white shadow-md object-cover transition-transform duration-600 hover:scale-110"
+            />
+                    <button onClick={signOut} >Log Out</button>
+                    
+                    </div>
+                  
+                  
                     :
 
                     <>

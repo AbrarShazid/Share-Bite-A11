@@ -8,6 +8,7 @@ import ManageMyFood from "../pages/ManageMyFood";
 import MyFoodReq from "../pages/MyFoodReq";
 import LogIn from "../pages/LogIn";
 import Register from "../pages/Register";
+import PrivateRoute from "../provider/PrivateRoute";
 
 
 
@@ -30,15 +31,23 @@ const router = createBrowserRouter([
 
           {
             path:"/add-food",
-           Component:AddFood
+
+            element:<PrivateRoute>
+              <AddFood></AddFood>
+            </PrivateRoute>
+          
           },
           {
             path:"/manage-my-food",
-            Component:ManageMyFood
+              element:<PrivateRoute>
+             <ManageMyFood></ManageMyFood>
+            </PrivateRoute>
           },
           {
             path:"/food-request",
-            Component:MyFoodReq
+             element:<PrivateRoute>
+             <MyFoodReq></MyFoodReq>
+            </PrivateRoute>
           },
           {
             path:"/login",

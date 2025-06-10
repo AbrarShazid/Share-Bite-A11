@@ -1,12 +1,19 @@
 import Lottie from 'lottie-react';
 import React, { use } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import loginLottie from "../assets/login-animation.json"
 import { AuthContext } from '../provider/AuthContext';
 import toast from 'react-hot-toast';
 
+
+
+
+
+
 const LogIn = () => {
+  const navigate=useNavigate()
+  const location=useLocation()
 
 
   const { login, signGoogle } = use(AuthContext)
@@ -24,6 +31,10 @@ const LogIn = () => {
         toast.success("Log in Successful!");
         e.target.reset()
 
+          navigate(`${location.state?location.state:"/"}`)
+          console.log(`${location.state}`);
+          
+
 
       })
       .catch(err => {
@@ -36,20 +47,21 @@ const LogIn = () => {
   }
 
   // log in with google 
-  const  handleGoogleLogin=()=>{
+  const handleGoogleLogin = () => {
 
-signGoogle()
-.then(res=>{
-     toast.success("Login successful!");
+    signGoogle()
+      .then(res => {
+        toast.success("Login successful!");
+        navigate(`${location.state?location.state:"/"}`)
 
-})
-.catch(err=>{
-
-
-  toast.error(err.message);
+      })
+      .catch(err => {
 
 
-})
+        toast.error(err.message);
+
+
+      })
 
 
   }

@@ -1,12 +1,15 @@
 import React, { use } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../provider/AuthContext';
 import toast from 'react-hot-toast';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
-  const { createUser, signGoogle } = use(AuthContext)
+  const { setUser,createUser, signGoogle } = use(AuthContext)
+
+const navigate=useNavigate()
 
 
   const handleReg = (e) => {
@@ -14,6 +17,8 @@ const Register = () => {
     const form = e.target
     const email = form.email.value
     const pass = form.password.value
+    const name = form.name.value
+    const photo = form.photoUrl.value
 
 
     if (!/[A-Z]/.test(pass)) {
@@ -73,9 +78,36 @@ const Register = () => {
 
     createUser(email, pass)
       .then(result => {
+          const user =result.user
+     
+          
 
-        toast.success("Create Account Successfully.")
-        e.target.reset()
+
+ updateProfile(user, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            toast.success("SignUp Successful!");
+            setUser({ ...user, displayName: name, photoURL: photo });
+
+            e.target.reset();
+            navigate("/");
+          })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       })
       .catch(err => {
 
