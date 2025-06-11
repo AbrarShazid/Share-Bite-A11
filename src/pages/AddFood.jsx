@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { use } from "react";
 import { AuthContext } from "../provider/AuthContext";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddFood = () => {
   const { user } = use(AuthContext);
@@ -17,6 +19,7 @@ const AddFood = () => {
 
 
     const form = e.target
+
     const name = form.name.value
     const img = form.image.value
     const quantity = form.quantity.value
@@ -37,8 +40,19 @@ const AddFood = () => {
 
 
     }
-    console.log(data);
 
+    axios.post("http://localhost:5000/foods", data)
+      .then(res => {
+        setIsSubmitting(false)
+        toast.success(`${name} added successfully!`)
+        e.target.reset()
+      })
+      .catch(err => {
+        setIsSubmitting(false)
+        toast.error("Something Went Wrong")
+
+        e.target.reset()
+      })
 
   };
 
