@@ -2,7 +2,7 @@ import React from 'react';
 
 const AvailableFood = () => {
   return (
-    <div>
+    <div className=' px-[3%] py-4'>
       asd
     </div>
   );

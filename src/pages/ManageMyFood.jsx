@@ -2,7 +2,7 @@ import React from 'react';
 
 const ManageMyFood = () => {
   return (
-    <div>
+    <div className=' px-[3%] py-4'>
       Manage My food 
     </div>
   );

@@ -57,7 +57,7 @@ const AddFood = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 md:p-8 my-8 bg-white rounded-xl shadow-lg">
+    <div className="max-w-2xl mx-auto p-6 md:p-8 my-8 bg-white rounded-xl shadow-lg  px-[3%] py-4">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-[#ff6d03] mb-2">Share Your Food</h2>
         <p className="text-gray-600">Help reduce waste by donating excess food to those in need.</p>
