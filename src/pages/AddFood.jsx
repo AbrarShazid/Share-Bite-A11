@@ -22,7 +22,7 @@ const AddFood = () => {
 
     const name = form.name.value
     const img = form.image.value
-    const quantity = form.quantity.value
+   const quantity = parseInt(form.quantity.value);
     const expire = form.expireAt.value
     const location = form.location.value
     const notes = form.notes.value
@@ -40,6 +40,7 @@ const AddFood = () => {
 
 
     }
+
 
     axios.post("http://localhost:5000/foods", data)
       .then(res => {

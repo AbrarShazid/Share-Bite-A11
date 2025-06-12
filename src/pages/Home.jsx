@@ -1,12 +1,14 @@
 import React from 'react';
-import Banner from '../Components/Banner';
+import Banner from '../Components/Home/Banner';
+import FeatureFood from '../Components/Home/FeatureFood';
 
 const Home = () => {
   return (
     <div >
-    
 
-<Banner></Banner>
+
+      <Banner></Banner>
+<FeatureFood></FeatureFood>
 
     </div>
   );

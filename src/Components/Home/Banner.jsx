@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerImg from "../assets/Banner.jpg";
+import bannerImg from "../../assets/Banner.jpg";
 import { NavLink } from 'react-router';
 import { BiDonateHeart } from "react-icons/bi";
 import { MdFoodBank } from "react-icons/md";
