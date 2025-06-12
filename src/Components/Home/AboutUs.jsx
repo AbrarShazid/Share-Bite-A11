@@ -9,7 +9,7 @@ import image2 from '../../assets/baby_.jpg';
 
 const AboutUs = () => {
   return (
-    <section className="relative overflow-hidden py-24 px-6 md:px-[5%] bg-gradient-to-br from-gray-50 to-orange-50">
+    <section className="relative overflow-hidden py-10 lg:py-24 px-6 md:px-[5%] bg-gradient-to-br from-gray-50 to-orange-50">
 
       {/* 🌍 Lottie Background */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">

@@ -39,8 +39,8 @@ const FeatureFood = () => {
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
-              <h3 className="text-2xl font-semibold text-[#ff6d03] mb-2">{food.name}</h3>
-              <div className="flex flex-wrap items-center gap-2 text-sm mb-3">
+              <h3 className="text-center lg:text-left text-2xl font-semibold text-[#ff6d03] mb-2">{food.name}</h3>
+              <div className="flex flex-col lg:flex-row flex-wrap items-center gap-2 text-sm mb-3">
                 <span className="bg-[#fff3e7] text-[#ff6d03] font-medium px-3 py-1 rounded-full">
                   Quantity: {food.quantity}
                 </span>
