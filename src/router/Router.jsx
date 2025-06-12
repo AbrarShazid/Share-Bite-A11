@@ -9,6 +9,7 @@ import MyFoodReq from "../pages/MyFoodReq";
 import LogIn from "../pages/LogIn";
 import Register from "../pages/Register";
 import PrivateRoute from "../provider/PrivateRoute";
+import FoodDetails from "../pages/FoodDetails";
 
 
 
@@ -16,57 +17,72 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayOut></HomeLayOut>,
-    children:[
-          {
-            index:true,
-            Component:Home
-          }
-          ,
-          {
-            path:"/available-food",
-            Component:AvailableFood
-          },
+    children: [
+      {
+        index: true,
+        element: <Home></Home>
+      }
+      ,
+      {
+        path: "/available-food",
+        element: <AvailableFood></AvailableFood>
+      },
+
+
+      {
+        path: "/food/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/food-details/${params.id}`),
+        element: <PrivateRoute>
+          <FoodDetails></FoodDetails>
+        </PrivateRoute>,
 
 
 
-          {
-            path:"/add-food",
 
-            element:<PrivateRoute>
-              <AddFood></AddFood>
-            </PrivateRoute>
-          
-          },
-          {
-            path:"/manage-my-food",
-              element:<PrivateRoute>
-             <ManageMyFood></ManageMyFood>
-            </PrivateRoute>
-          },
-          {
-            path:"/food-request",
-             element:<PrivateRoute>
-             <MyFoodReq></MyFoodReq>
-            </PrivateRoute>
-          },
-          {
-            path:"/login",
-            Component:LogIn
-          },
-          {
-            path:"/register",
-            Component:Register
-          },
-          
+      },
+
+
+
+
+      {
+        path: "/add-food",
+
+        element: <PrivateRoute>
+          <AddFood></AddFood>
+        </PrivateRoute>
+
+      },
+      {
+        path: "/manage-my-food",
+        element: <PrivateRoute>
+          <ManageMyFood></ManageMyFood>
+        </PrivateRoute>
+      },
+      {
+        path: "/food-request",
+        element: <PrivateRoute>
+          <MyFoodReq></MyFoodReq>
+        </PrivateRoute>
+      },
+      {
+        path: "/login",
+        element: <LogIn></LogIn>
+      },
+      {
+        path: "/register",
+        element: <Register></Register>
+      },
+
 
 
 
     ]
   },
- 
+
   {
     path: "*",
-    element:<Error></Error>
+    element: <Error></Error>
   },
 ]);
 

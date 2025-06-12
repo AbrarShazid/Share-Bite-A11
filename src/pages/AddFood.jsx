@@ -28,6 +28,7 @@ const AddFood = () => {
     const notes = form.notes.value
     const userEmail = user.email
     const userName = user.displayName
+    const availability="Available"
 
     const data = {
 
@@ -36,7 +37,8 @@ const AddFood = () => {
       quantity,
       expire, location, notes,
       userEmail,
-      userName
+      userName,
+      availability
 
 
     }

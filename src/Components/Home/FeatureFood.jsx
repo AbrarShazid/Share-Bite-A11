@@ -28,7 +28,7 @@ const FeatureFood = () => {
         {foods.map((food) => (
           <Link
             key={food._id}
-            to={`/foods/${food._id}`}
+            to={`/food/${food._id}`}
             className="block hover:no-underline"
           >
             <div className="bg-white p-6 rounded-2xl shadow-md border border-[#ff6d0332] transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -49,17 +49,27 @@ const FeatureFood = () => {
                 </span>
               </div>
               <p className="text-gray-600 text-sm line-clamp-3">{food.notes}</p>
+               <div className="flex justify-center mt-4">
+                            <button
+    
+                              className="inline-block mt-auto text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-xl transition duration-300          "
+                            >
+                              View Details
+                            </button>
+                          </div>
             </div>
+
+            
           </Link>
         ))}
       </div>
 
       <div className="text-center mt-8">
-        <Link to="/available-food">
-          <button className="relative inline-block px-8 py-3 bg-[#ff6d03] text-white font-semibold text-lg rounded-full shadow-lg transition-all duration-300 hover:bg-[#e65c00] hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff6d03]">
+        <Link className="relative inline-block px-8 py-3 bg-[#ff6d03] text-white font-semibold text-lg rounded-full shadow-lg transition-all duration-300 hover:bg-[#e65c00] hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff6d03]" to="/available-food">
+          
             <span className="relative z-10">Show All</span>
             <span className="absolute inset-0 rounded-full bg-white opacity-0 hover:opacity-10 transition duration-300"></span>
-          </button>
+         
         </Link>
       </div>
     </section>
