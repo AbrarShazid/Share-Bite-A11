@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router';
 
 import dayjs from 'dayjs';
+import LoadingSpinner from '../Components/LoadingSpinner';
 
 const fetchFoods = async (sortOption) => {
   const res = await axios.get("http://localhost:5000/available-food", {
@@ -14,6 +15,14 @@ const fetchFoods = async (sortOption) => {
 
 const AvailableFood = () => {
   const [sortOption, setSortOption] = useState('');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleSort = (option) => {
+    setSortOption(option);
+    setIsDropdownOpen(false); // Close dropdown
+  };
+
+
 
   const { data: foods = [], isLoading, error } = useQuery({
     queryKey: ['allFoods', sortOption],
@@ -21,9 +30,7 @@ const AvailableFood = () => {
   });
 
   if (isLoading) return (
-    <div className="flex justify-center items-center h-64">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
-    </div>
+   <LoadingSpinner></LoadingSpinner>
   );
 
   if (error) return (
@@ -43,18 +50,26 @@ const AvailableFood = () => {
         </p>
       </div>
 
-      <div className='flex flex-row-reverse'>
 
 
-        <div className="dropdown dropdown-end ml-auto mb-6 ">
-          <label tabIndex={0} className="btn m-1">Sort By</label>
-          <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><button onClick={() => setSortOption("expire-asc")}>Expire Early</button></li>
-            <li><button onClick={() => setSortOption("expire-desc")}>Expire Later</button></li>
+   <div className='flex '>
+      <div className="relative ml-auto mb-6">
+        <button
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          className="btn m-1"
+        >
+          Sort By
+        </button>
+
+        {isDropdownOpen && (
+          <ul className="absolute right-0 z-10 menu p-2 shadow bg-base-100 rounded-box w-52">
+            <li><button onClick={() => handleSort("expire-asc")}>Expire Early</button></li>
+            <li><button onClick={() => handleSort("expire-desc")}>Expire Later</button></li>
           </ul>
-        </div>
-
+        )}
       </div>
+    </div>
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
         {foods.map((food) => (

@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
     <div className='flex justify-center items-center '>
   
 
-       <Lottie animationData={loadingAnimation} loop={true} />
+       <Lottie className="w-[50%]" animationData={loadingAnimation} loop={true} />
 
 
 

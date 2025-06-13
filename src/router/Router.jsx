@@ -10,6 +10,7 @@ import LogIn from "../pages/LogIn";
 import Register from "../pages/Register";
 import PrivateRoute from "../provider/PrivateRoute";
 import FoodDetails from "../pages/FoodDetails";
+import Update from "../pages/Update";
 
 
 
@@ -59,6 +60,17 @@ const router = createBrowserRouter([
           <ManageMyFood></ManageMyFood>
         </PrivateRoute>
       },
+
+
+      {
+        path:"/update/:id",
+        loader:({params})=>fetch(`http://localhost:5000/food-details/${params.id}`),
+        element:<PrivateRoute>
+          <Update></Update>
+        </PrivateRoute>
+
+      },
+
       {
         path: "/food-request",
         element: <PrivateRoute>
