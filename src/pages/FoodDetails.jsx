@@ -1,17 +1,20 @@
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { use, useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
+import { AuthContext } from '../provider/AuthContext';
+
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const FoodDetails = () => {
-  const food = useLoaderData();
-  const expireDate = dayjs(food.expire);
 
-  
+  const { user } = use(AuthContext);
+  const food = useLoaderData();
+  const [currentFood, setCurrentFood] = useState(food);
+
+  const expireDate = dayjs(food.expire);
   const daysUntilExpire = expireDate.diff(dayjs(), 'days');
 
-  
-
- 
   const getUrgencyBadge = () => {
     if (daysUntilExpire <= 0) return { text: 'Expired', color: 'bg-red-100 text-red-800' };
     if (daysUntilExpire <= 1) return { text: 'Expires today!', color: 'bg-red-100 text-red-800' };
@@ -21,9 +24,77 @@ const FoodDetails = () => {
 
   const urgencyBadge = getUrgencyBadge();
 
+  // modal open 
+
+  const modalOpen = () => {
+    if (food.userEmail == user?.email) {
+      toast.error("You cannot request your own donated food!!")
+      return;
+    }
+
+    if (currentFood.availability == "Available") {
+      document.getElementById('my_modal_1').showModal()
+    }
+    else {
+      toast.error("This food is already requested!")
+    }
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target
+
+    const foodName = form.name.value;
+    const foodImg = form.foodImg.value;
+    const foodId = form.foodId.value;
+    const donatorName = form.donatorName.value;
+    const donatorEmail = form.donatorEmail.value;
+    const userEmail = form.userEmail.value;
+    const reqDate = form.reqDate.value;
+    const pickUp = form.pickUpLocation.value;
+    const expireDate = form.expireDate.value;
+    const notes = form.notes.value;
+
+
+    const allData = {
+
+      foodName,
+      foodImg,
+      foodId,
+      donatorName,
+      donatorEmail,
+      userEmail,
+      reqDate,
+      pickUp,
+      expireDate,
+      notes
+
+    }
+    console.log(allData);
+
+    axios.post("http://localhost:5000/requestFood", allData)
+      .then(res => {
+
+        return axios.patch(`http://localhost:5000/status-change/${food._id}`)
+          .then(updateRes => {
+
+            setCurrentFood(prev => ({ ...prev, availability: "Requested" }));
+            form.reset();
+            document.getElementById('my_modal_1').close();
+            toast.success("Request Submitted Successfully!");
+          });
+      })
+      .catch(err => {
+        toast.error(err.response?.data?.message || "Request failed. Try again later!");
+      });
+
+
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      {/* Breadcrumb  */}
+      {/* Breadcrumb */}
       <nav className="flex mb-6" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-2">
           <li className="inline-flex items-center">
@@ -34,7 +105,7 @@ const FoodDetails = () => {
           <li>
             <div className="flex items-center">
               <svg className="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
               </svg>
               <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2">Food Details</span>
             </div>
@@ -44,7 +115,6 @@ const FoodDetails = () => {
 
       {/* Main card */}
       <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-     
         <div className="relative h-64 md:h-80 w-full overflow-hidden">
           <img
             src={food.img}
@@ -58,12 +128,16 @@ const FoodDetails = () => {
           )}
         </div>
 
-       {/* food name and quantity  */}
+        {/* food name and quantity */}
         <div className="p-6 md:p-8">
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{food.name}</h1>
-            <span className="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-              {food.quantity} available
+            <span className={` ${currentFood.availability == "Available" ? ' bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}     text-xs font-medium px-2.5 py-0.5 rounded-full `}>
+
+              {
+                currentFood.availability == "Available" ? `${currentFood.quantity} ${currentFood.availability}` : `${currentFood.availability}`
+
+              }
             </span>
           </div>
 
@@ -80,7 +154,7 @@ const FoodDetails = () => {
               <svg className="w-5 h-5 mr-1.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <span>Expires: {expireDate.format('MMMM D, YYYY')} ({daysUntilExpire > 0 ? `${daysUntilExpire} days left` : `${daysUntilExpire*-1} days ago`})</span>
+              <span>Expires: {expireDate.format('MMMM D, YYYY')} ({daysUntilExpire > 0 ? `${daysUntilExpire} days left` : `${daysUntilExpire * -1} days ago`})</span>
             </div>
           </div>
 
@@ -91,7 +165,7 @@ const FoodDetails = () => {
           </div>
 
           {/* Donor info */}
-          <div className="bg-gray-50 rounded-lg p-4 mb-8">
+          {/* <div className="bg-gray-50 rounded-lg p-4 mb-8">
             <h3 className="text-sm font-medium text-gray-500 mb-2">Donated by</h3>
             <div className="flex items-center">
               <div className="bg-orange-100 w-10 h-10 rounded-full flex items-center justify-center text-orange-600 font-medium">
@@ -102,16 +176,196 @@ const FoodDetails = () => {
                 <p className="text-sm text-gray-500">{food.userEmail}</p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Action button */}
           <div className="flex justify-center">
-            <Link
-              to="#"
-              className="w-full md:w-auto px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg text-center transition duration-300 hover:shadow-lg hover:-translate-y-1"
+            <button
+              className={` btn w-full md:w-auto px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg text-center transition duration-300 hover:shadow-lg hover:-translate-y-1`}
+              onClick={() => modalOpen()}
             >
               Request This Food
-            </Link>
+            </button>
+
+            {/* Modal */}
+            <dialog id="my_modal_1" className="modal modal-bottom sm:modal-middle">
+              <div className="modal-box max-w-full w-full sm:max-w-md">
+                <h3 className="font-bold text-lg md:text-xl mb-4">Request Food: {food.name}</h3>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-4">
+                    {/* food name  */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Food Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={food.name}
+                        disabled
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                      />
+                    </div>
+
+                    {/* food image link  */}
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Food Image Link <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="foodImg"
+                        value={food.img}
+                        disabled
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                      />
+                    </div>
+
+                    {/* food id  */}
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Food Id <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="foodId"
+                        value={food._id}
+
+                        disabled
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                      />
+
+
+                    </div>
+
+
+                    {/* donator name  */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Donator Name <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="donatorName"
+                          value={food.userName}
+                          disabled
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Donator Email <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="donatorEmail"
+                          value={food.userEmail}
+                          disabled
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Your Email <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="userEmail"
+                          value={user?.email || ''}
+                          disabled
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Request Date <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          name='reqDate'
+                          value={dayjs().format('MMMM D, YYYY')}
+                          disabled
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+
+                      {/* location  */}
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Pick Up Location<span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="pickUpLocation"
+                          value={food.location}
+                          disabled
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        />
+                      </div>
+                      {/* expire data  */}
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Expire Date <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          name='expireDate'
+                          value={expireDate.format('MMMM D, YYYY')}
+                          disabled
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        />
+                      </div>
+
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Additional Notes
+                      </label>
+                      <textarea
+                        name="notes"
+                        placeholder="Allergies, special instructions, etc."
+                        rows="3"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="modal-action">
+                    <button
+                      type="submit"
+
+                      className={`w-full py-3 px-4 rounded-lg font-medium text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition `}
+                    >
+
+                      <span className="flex items-center justify-center">
+
+                        Request Food
+                      </span>
+
+                    </button>
+                  </div>
+                </form>
+
+                <div className="modal-action absolute top-2 right-2">
+                  <form method="dialog">
+                    <button className="btn btn-sm btn-circle">✕</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>
