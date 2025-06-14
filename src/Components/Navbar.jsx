@@ -42,11 +42,11 @@ const Navbar = () => {
 
   const centerItem = (
     <>
-      <NavLink to="/" className={navItemClass}>Home</NavLink>
-      <NavLink to="/available-food" className={navItemClass}>Available Food</NavLink>
-      <NavLink to="/add-food" className={navItemClass}>Add Food</NavLink>
-      <NavLink to="/manage-my-food" className={navItemClass}>Manage My Food</NavLink>
-      <NavLink to="/food-request" className={navItemClass}>My Food Request</NavLink>
+      <NavLink  onClick={toggleMenu} to="/" className={navItemClass}>Home</NavLink>
+      <NavLink  onClick={toggleMenu} to="/available-food" className={navItemClass}>Available Food</NavLink>
+      <NavLink  onClick={toggleMenu} to="/add-food" className={navItemClass}>Add Food</NavLink>
+      <NavLink  onClick={toggleMenu} to="/manage-my-food" className={navItemClass}>Manage My Food</NavLink>
+      <NavLink  onClick={toggleMenu} to="/food-request" className={navItemClass}>My Food Request</NavLink>
     </>
   );
 
