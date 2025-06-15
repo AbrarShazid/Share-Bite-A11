@@ -7,6 +7,7 @@ import { LiaArrowRightSolid } from "react-icons/lia";
 import image1 from '../../assets/volunteer.webp';
 import image2 from '../../assets/baby_.webp';
 
+
 const AboutUs = () => {
   return (
     <section className="relative overflow-hidden py-10 lg:py-24 px-6 md:px-[5%] bg-gradient-to-br from-gray-50 to-orange-50">
