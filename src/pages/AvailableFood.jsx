@@ -42,7 +42,7 @@ const AvailableFood = () => {
   );
 
   return (
-    <div className="px-[3%]">
+    <div className="px-[3%] mb-[2%]">
       <div className="my-5 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
           Available <span className="text-orange-500">Food</span> Donations
