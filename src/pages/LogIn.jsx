@@ -6,18 +6,11 @@ import loginLottie from "../assets/login-animation.json"
 import { AuthContext } from '../provider/AuthContext';
 import toast from 'react-hot-toast';
 
-
-
-
-
-
 const LogIn = () => {
   const navigate=useNavigate()
   const location=useLocation()
 
-
   const { login, signGoogle } = use(AuthContext)
-
   const handleLogin = (e) => {
     e.preventDefault()
     const form = e.target
@@ -30,20 +23,12 @@ const LogIn = () => {
 
         toast.success("Log in Successful!");
         e.target.reset()
-
           navigate(`${location.state?location.state:"/"}`)
           console.log(`${location.state}`);
-          
-
-
       })
       .catch(err => {
-
         toast.error(err.message);
-
-
       })
-
   }
 
   // log in with google 
@@ -56,19 +41,11 @@ const LogIn = () => {
 
       })
       .catch(err => {
-
-
         toast.error(err.message);
-
-
       })
-
-
   }
-
-
   return (
-    <section className="min-h-screen flex items-center justify-center  px-4 py-[5%]">
+    <section className="min-h-[90vh] flex items-center justify-center  px-4 py-[5%]">
       <div className="w-full max-w-md p-8 bg-white shadow-xl rounded-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#ff6d03] ">
           Login
@@ -102,9 +79,6 @@ const LogIn = () => {
               required
             />
           </div>
-
-
-
           <div className="text-sm text-gray-600 text-right">
 
             Don't have an account?{" "}<Link to="/register">
@@ -141,12 +115,7 @@ const LogIn = () => {
 
           className='w-80 max-h-full'
         >
-
-
-
         </Lottie>
-
-
       </div>
 
     </section>

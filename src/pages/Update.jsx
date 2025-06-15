@@ -11,7 +11,6 @@ const Update = () => {
 
   const axiosSecure=useAxiosSecure()
 
-
   // fetch old data 
 
   const fetchData= async()=>{
@@ -25,7 +24,6 @@ const Update = () => {
 
 
   })
-
 
   const updateMutation = useMutation({
     mutationFn: (updatedData) =>

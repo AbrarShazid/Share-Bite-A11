@@ -88,7 +88,6 @@ const FoodDetails = () => {
 
     }
 
-
     axiosSecure.post("/requestFood", allData)
       .then(res => {
 
@@ -104,9 +103,6 @@ const FoodDetails = () => {
       .catch(err => {
         toast.error(err.response?.data?.message || "Request failed. Try again later!");
       });
-
-
-
 
   };
 
