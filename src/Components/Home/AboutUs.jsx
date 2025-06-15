@@ -4,8 +4,8 @@ import Lottie from 'lottie-react';
 import map from "../../assets/worldmap.json";
 import { LiaArrowRightSolid } from "react-icons/lia";
 
-import image1 from '../../assets/volunteer.jpg';
-import image2 from '../../assets/baby_.jpg';
+import image1 from '../../assets/volunteer.webp';
+import image2 from '../../assets/baby_.webp';
 
 const AboutUs = () => {
   return (

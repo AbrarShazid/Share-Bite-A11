@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '../assets/Favicon.png'
+import logo from '../assets/Favicon1.webp'
 import toast from 'react-hot-toast';
 const Footer = () => {   
   

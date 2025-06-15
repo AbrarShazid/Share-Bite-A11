@@ -6,7 +6,7 @@ import { AuthContext } from '../provider/AuthContext';
 import dayjs from 'dayjs';
 import { FiClock, FiMapPin, FiCalendar, FiUser, FiInfo } from 'react-icons/fi';
 import LoadingSpinner from '../Components/LoadingSpinner';
-import dummyFood from "../assets/dummyFood.jpg"
+import dummyFood from "../assets/dummyFood.webp"
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
 

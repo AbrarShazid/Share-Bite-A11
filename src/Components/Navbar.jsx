@@ -4,8 +4,8 @@ import { AuthContext } from "../provider/AuthContext";
 import toast from "react-hot-toast";
 import spinner from "../assets/loading_small.json"
 import Lottie from "lottie-react";
-import dummyProfile from "../assets/dummy.jpg"
-import logo from "../assets/Favicon.png"
+import dummyProfile from "../assets/dummy.webp"
+import logo from "../assets/Favicon1.webp"
 
 
 const Navbar = () => {
