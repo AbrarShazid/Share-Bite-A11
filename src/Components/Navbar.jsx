@@ -78,7 +78,7 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden lg:flex gap-7">{centerItem}</div>
 
-        {/* Right Side (Auth Buttons) */}
+        {/* Right Side  */}
         <div className="hidden lg:flex ">
 
 

@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { use } from "react";
 import { AuthContext } from "../provider/AuthContext";
-import axios from "axios";
+
 import toast from "react-hot-toast";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import dayjs from "dayjs";
 
 const AddFood = () => {
+ 
   const { user } = use(AuthContext);
+  const axiosSecure=useAxiosSecure()
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+const today = dayjs().format('YYYY-MM-DDTHH:mm');
 
 
   const handleSubmit = (e) => {
@@ -44,7 +48,7 @@ const AddFood = () => {
     }
 
 
-    axios.post("http://localhost:5000/foods", data)
+    axiosSecure.post("/foods", data)
       .then(res => {
         setIsSubmitting(false)
         toast.success(`${name} added successfully!`)
@@ -123,7 +127,7 @@ const AddFood = () => {
                 type="datetime-local"
                 id="expireAt"
                 name="expireAt"
-
+ min={today}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-[#ff6d03] focus:border-[#ff6d03] transition"
               />

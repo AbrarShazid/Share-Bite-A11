@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
 import React, { use } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../provider/AuthContext';
@@ -7,18 +7,28 @@ import dayjs from 'dayjs';
 import { FiClock, FiMapPin, FiCalendar, FiUser, FiInfo } from 'react-icons/fi';
 import LoadingSpinner from '../Components/LoadingSpinner';
 import dummyFood from "../assets/dummyFood.jpg"
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
-const fetchFoods = async (mail) => {
-  const res = await axios.get(`http://localhost:5000/myReqFood/${mail}`);
-  return res.data;
-};
+
 
 const MyFoodReq = () => {
   const { user } = use(AuthContext);
 
+
+  const axiosSecure = useAxiosSecure()
+
+
+ 
+
+  const fetchFoods = async () => {
+    // const res = await axiosSecure.get(`/myReqFood/siyam6@gmail.com`);
+    const res = await axiosSecure.get(`/myReqFood`);
+    return res.data;
+  };
   const { data: foods = [], isLoading, error } = useQuery({
-    queryKey: ['myReqFood'],
-    queryFn: () => fetchFoods(user?.email),
+    queryKey: ['myReqFood', user?.email],
+    queryFn: fetchFoods,
+    enabled: !!user?.email,
 
   });
 
@@ -53,8 +63,8 @@ const MyFoodReq = () => {
       {foods.length > 0 ? (
         <div
           className={`${foods.length < 3
-              ? 'flex flex-wrap justify-center gap-6'
-              : 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
+            ? 'flex flex-wrap justify-center gap-6'
+            : 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
             }`}
         >
 

@@ -1,16 +1,29 @@
 import dayjs from 'dayjs';
-import React, { use, useState } from 'react';
-import { Link, useLoaderData } from 'react-router';
+import React, { use } from 'react';
+import { Link, useParams } from 'react-router';
 import { AuthContext } from '../provider/AuthContext';
-
-import axios from 'axios';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const FoodDetails = () => {
-
+  const { id } = useParams();
+  const axiosSecure = useAxiosSecure()
   const { user } = use(AuthContext);
-  const food = useLoaderData();
-  const [currentFood, setCurrentFood] = useState(food);
+  // food details fetch 
+
+  const foodData = async () => {
+    const res = await axiosSecure.get(`food-details/${id}`)
+    return res.data
+
+  }
+  const { data: food = {}, isError, refetch } = useQuery({
+    queryKey: [id],
+    queryFn: foodData
+  });
+
+
+  // const [currentFood, setCurrentFood] = useState(food);
 
   const expireDate = dayjs(food.expire);
   const daysUntilExpire = expireDate.diff(dayjs(), 'days');
@@ -32,7 +45,7 @@ const FoodDetails = () => {
       return;
     }
 
-    if (currentFood.availability == "Available") {
+    if (food.availability == "Available") {
       document.getElementById('my_modal_1').showModal()
     }
     else {
@@ -41,6 +54,9 @@ const FoodDetails = () => {
 
   }
 
+
+
+  // update data to requested and 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target
@@ -71,15 +87,15 @@ const FoodDetails = () => {
       notes
 
     }
-    console.log(allData);
 
-    axios.post("http://localhost:5000/requestFood", allData)
+
+    axiosSecure.post("/requestFood", allData)
       .then(res => {
 
-        return axios.patch(`http://localhost:5000/status-change/${food._id}`)
+        return axiosSecure.patch(`/status-change/${food._id}`)
           .then(updateRes => {
 
-            setCurrentFood(prev => ({ ...prev, availability: "Requested" }));
+            refetch();
             form.reset();
             document.getElementById('my_modal_1').close();
             toast.success("Request Submitted Successfully!");
@@ -90,9 +106,13 @@ const FoodDetails = () => {
       });
 
 
+
+
   };
 
   return (
+
+
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Breadcrumb */}
       <nav className="flex mb-6" aria-label="Breadcrumb">
@@ -132,10 +152,10 @@ const FoodDetails = () => {
         <div className="p-6 md:p-8">
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{food.name}</h1>
-            <span className={` ${currentFood.availability == "Available" ? ' bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}     text-xs font-medium px-2.5 py-0.5 rounded-full `}>
+            <span className={` ${food.availability == "Available" ? ' bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}     text-xs font-medium px-2.5 py-0.5 rounded-full `}>
 
               {
-                currentFood.availability == "Available" ? `${currentFood.quantity} ${currentFood.availability}` : `${currentFood.availability}`
+                food.availability == "Available" ? `${food.quantity} ${food.availability}` : `${food.availability}`
 
               }
             </span>

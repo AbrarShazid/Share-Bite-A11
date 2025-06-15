@@ -2,25 +2,28 @@ import { use, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthContext";
 import Swal from "sweetalert2";
-import axios from "axios";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BiDonateHeart, BiEdit, BiTrash } from "react-icons/bi";
 
 import dummyBackup from "../assets/dummyFood.jpg"
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageMyFood = () => {
   const { user } = use(AuthContext);
-  const navigate = useNavigate();
+  const axiosSecure=useAxiosSecure()
+    const navigate = useNavigate();
   const queryClient = useQueryClient();
 
 
   const allData = async () => {
-    const res = await axios.get(`http://localhost:5000/mydata/${user.email}`);
+  
+     const res = await axiosSecure.get(`/mydata/${user.email}`);
     return res.data;
   };
 
   const { data: foods = [], isError } = useQuery({
-    queryKey: ["individualItems"],
+    queryKey: ["individualItems",user.email],
     queryFn: allData
   });
 
@@ -36,7 +39,7 @@ const ManageMyFood = () => {
 
   // Delete functionality
   const deleteMutation = useMutation({
-    mutationFn: async (id) => await axios.delete(`http://localhost:5000/foods/${id}`),
+    mutationFn: async (id) => await axiosSecure.delete(`/foods/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries(["individualItems"]);
       Swal.fire("Deleted!", "Your food item has been deleted.", "success");

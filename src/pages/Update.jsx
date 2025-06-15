@@ -1,19 +1,38 @@
 import React, { use } from "react";
 import Swal from "sweetalert2";
-import { useLoaderData } from "react-router";
+import {  useParams } from "react-router";
 import { AuthContext } from "../provider/AuthContext";
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Update = () => {
+  const {id}=useParams();
   const { user } = use(AuthContext);
-  const oldData = useLoaderData();
+
+  const axiosSecure=useAxiosSecure()
+
+
+  // fetch old data 
+
+  const fetchData= async()=>{
+     const res = await axiosSecure.get(`food-details/${id}`)
+     return res.data
+  }   
+
+  const {data:oldData={} ,refetch}=useQuery({
+    queryKey:[id],
+    queryFn:fetchData
+
+
+  })
+
 
   const updateMutation = useMutation({
     mutationFn: (updatedData) =>
-      axios.put(`http://localhost:5000/foods/${oldData._id}`, updatedData),
+      axiosSecure.put(`/foods/${oldData._id}`, updatedData),
     onSuccess: () => {
       Swal.fire("Updated!", "Your food item has been updated.", "success");
+      refetch()
     },
     onError: () => {
       Swal.fire("Error", "Failed to update food item.", "error");

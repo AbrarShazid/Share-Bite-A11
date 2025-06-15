@@ -31,7 +31,8 @@ const FeatureFood = () => {
             to={`/food/${food._id}`}
             className="block hover:no-underline"
           >
-            <div className="bg-white p-6 rounded-2xl shadow-md border-0 hover:border-1 hover:border-[#ff6d0332] transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+          <div className="bg-white p-6 rounded-2xl shadow-md border-0 hover:border hover:border-[#ff6d0332] transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between min-h-[450px]">
+
               <div className="relative overflow-hidden rounded-xl h-48 mb-4">
                 <img
                   src={food.img}

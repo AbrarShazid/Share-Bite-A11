@@ -7,10 +7,9 @@ import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
-  const { setUser,createUser, signGoogle } = use(AuthContext)
+  const { setUser, createUser, signGoogle } = use(AuthContext)
 
-const navigate=useNavigate()
-
+  const navigate = useNavigate()
 
   const handleReg = (e) => {
     e.preventDefault();
@@ -19,7 +18,6 @@ const navigate=useNavigate()
     const pass = form.password.value
     const name = form.name.value
     const photo = form.photoUrl.value
-
 
     if (!/[A-Z]/.test(pass)) {
       toast.error("Password must include at least one uppercase letter.", {
@@ -30,8 +28,6 @@ const navigate=useNavigate()
           padding: '6px',
           color: 'white',
         }
-
-
 
       });
       return;
@@ -47,8 +43,6 @@ const navigate=useNavigate()
           color: 'white',
         }
 
-
-
       });
       return;
     }
@@ -62,65 +56,36 @@ const navigate=useNavigate()
           color: 'white',
         }
 
-
-
       });
       return;
     }
 
-
-
-
-
-
-
-
-
     createUser(email, pass)
       .then(result => {
-          const user =result.user
-     
-          
+        const user = result.user
 
-
- updateProfile(user, {
+        updateProfile(user, {
           displayName: name,
           photoURL: photo,
         })
           .then(() => {
             toast.success("SignUp Successful!");
             setUser({ ...user, displayName: name, photoURL: photo });
-
             e.target.reset();
             navigate("/");
           })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
       })
       .catch(err => {
 
-        if (err == 'FirebaseError: Firebase: Error (auth/email-already-in-use).') {
-          toast.error('This email already registered.')
-          return;
-        }
-        toast.error(`Error->${err.message}`)
-
+       if (err.code === 'auth/email-already-in-use') {
+        toast.error('This email is already registered.');
+      } else {
+        toast.error(`Error: ${err.message}`);
+      }
 
       })
-
-
 
   }
   // google sign in 
@@ -132,15 +97,13 @@ const navigate=useNavigate()
     signGoogle()
       .then(res => {
         toast.success('Successfully Log in.')
-
+navigate("/");
       })
       .catch(err => {
         toast.error(`error ${err.message}`)
 
       })
   }
-
-
 
 
   return (
