@@ -101,7 +101,7 @@ const AvailableFood = () => {
             </button>
 
             {isDropdownOpen && (
-              <ul className="absolute right-0 z-10 mt-1 w-40 bg-white shadow-lg rounded-md border border-gray-200">
+              <ul className="absolute md:right-0 z-10 mt-1 w-40 bg-white shadow-lg rounded-md border border-gray-200">
                 <li>
                   <button 
                     onClick={() => handleSort("expire-asc")}
