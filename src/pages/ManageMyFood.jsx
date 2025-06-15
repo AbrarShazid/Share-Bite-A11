@@ -6,24 +6,22 @@ import Swal from "sweetalert2";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BiDonateHeart, BiEdit, BiTrash } from "react-icons/bi";
 
-import dummyBackup from "../assets/dummyFood.jpg"
+import dummyBackup from "../assets/dummyFood.webp"
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageMyFood = () => {
   const { user } = use(AuthContext);
-  const axiosSecure=useAxiosSecure()
-    const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure()
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-
   const allData = async () => {
-  
-     const res = await axiosSecure.get(`/mydata/${user.email}`);
+    const res = await axiosSecure.get(`/mydata/${user.email}`);
     return res.data;
   };
 
   const { data: foods = [], isError } = useQuery({
-    queryKey: ["individualItems",user.email],
+    queryKey: ["individualItems", user.email],
     queryFn: allData
   });
 
@@ -111,11 +109,11 @@ const ManageMyFood = () => {
                   <td className="px-6 py-4 ">
                     <div className="flex items-center justify-center">
                       <div className="flex-shrink-0 h-10 w-10">
-                        <img className="h-10 w-10 rounded-full object-cover" src={food.img ||`${dummyBackup}`} alt={food.name} />
+                        <img className="h-10 w-10 rounded-full object-cover" src={food.img || `${dummyBackup}`} alt={food.name} />
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900">{food.name}</div>
-                       
+
                       </div>
                     </div>
                   </td>
@@ -123,7 +121,7 @@ const ManageMyFood = () => {
                     <div className="text-sm text-gray-900">{food.quantity}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${food.availability=="Available"?'bg-green-100 text-green-800':'bg-red-100 text-red-800' }`}>
+                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${food.availability == "Available" ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                       {food.availability}
                     </span>
                   </td>
@@ -162,7 +160,7 @@ const ManageMyFood = () => {
                 <div className="ml-4 flex-1">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-medium text-gray-900">{food.name}</h3>
-                    <span className={`ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${food.availability=="Available"?'bg-green-100 text-green-800':'bg-red-100 text-red-800'}`}>
+                    <span className={`ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${food.availability == "Available" ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                       {food.availability}
                     </span>
                   </div>
