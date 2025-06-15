@@ -13,7 +13,7 @@ const Footer = () => {
 
 
     return (
-        <section className="py-8  sm:pt-10 lg:pt-12 text-white bg-black/60 mt-[5%] md:mt-[3%] lg:mt-[2%]">
+        <section className="py-8  sm:pt-10 lg:pt-12 text-white bg-black/60">
     <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid  md:col-span-3  gap-y-6 md:gap-y-10 lg:gap-y-16 gap-x-12                grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
             <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">

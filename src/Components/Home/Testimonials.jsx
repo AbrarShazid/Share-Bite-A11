@@ -49,7 +49,7 @@ const testimonialsData = [
 
 const Testimonials = () => {
   return (
-    <section className="bg-gradient-to-br from-orange-50 to-white py-16 px-2 md:px-4 lg:px-10 shadow-xl">
+    <section className="bg-gradient-to-br from-orange-50 to-white py-8 lg:py-16 px-2 md:px-4 lg:px-10 shadow-xl">
       <div className="grid grid-cols-1 lg:grid-cols-5  items-center  min-h-[80vh]">
 
         {/* Left Box with Testimonial Content */}
