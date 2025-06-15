@@ -7,7 +7,7 @@ import { AuthContext } from '../provider/AuthContext';
 const axiosInstance = axios.create({
 
 
-  baseURL: 'https://share-bite-a11-server-li055deaf-abrarshazids-projects.vercel.app'
+  baseURL: 'https://share-bite-a11-server.vercel.app'
 })
 
 

@@ -10,7 +10,7 @@ import LoadingSpinner from '../Components/LoadingSpinner'
 import { useDebounce } from 'use-debounce';
 
 const fetchFoods = async (sortOption,searchQuery) => {
-  const res = await axios.get("https://share-bite-a11-server-li055deaf-abrarshazids-projects.vercel.app/available-food", {
+  const res = await axios.get("https://share-bite-a11-server.vercel.app/available-food", {
     params: { sort: sortOption,search:searchQuery }
   });
   return res.data;
