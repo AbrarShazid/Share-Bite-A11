@@ -4,7 +4,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import { Link } from 'react-router';
 
 const fetchTopFoods = async () => {
-  const res = await axios.get('http://localhost:5000/featured-foods');
+  const res = await axios.get('https://share-bite-a11-server-li055deaf-abrarshazids-projects.vercel.app/featured-foods');
   return res.data;
 };
 

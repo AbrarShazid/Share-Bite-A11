@@ -7,7 +7,7 @@ import { AuthContext } from '../provider/AuthContext';
 const axiosInstance = axios.create({
 
 
-  baseURL: 'http://localhost:5000'
+  baseURL: 'https://share-bite-a11-server-li055deaf-abrarshazids-projects.vercel.app'
 })
 
 

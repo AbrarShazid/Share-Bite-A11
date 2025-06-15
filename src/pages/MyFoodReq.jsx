@@ -21,7 +21,7 @@ const MyFoodReq = () => {
  
 
   const fetchFoods = async () => {
-    // const res = await axiosSecure.get(`/myReqFood/siyam6@gmail.com`);
+    
     const res = await axiosSecure.get(`/myReqFood`);
     return res.data;
   };
