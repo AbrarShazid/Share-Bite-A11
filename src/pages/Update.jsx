@@ -47,13 +47,14 @@ const Update = () => {
 
     const userEmail = user.email;
     const userName = user.displayName;
+    const availability=oldData.availability
 
     const updatedData = {
       ...newInfo,
       quantity: Number(newInfo.quantity),
       userEmail,
       userName,
-      availability: "Available",
+      availability
     };
 
     updateMutation.mutate(updatedData);
