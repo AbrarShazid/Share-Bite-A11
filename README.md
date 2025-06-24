@@ -10,19 +10,12 @@
 
 ## ✨ Key Features
 
-### 🔐 Authentication
-- Email/password-based login and registration
-- Google OAuth integration
-- JWT token authentication
-- Protected routes
-- Form validation with error feedback
-
 ### 🧾 Pages & Routing
-- **Home**: Banner, featured foods (top 6 by quantity), about us and testimonial section
+- **Home**: Featured foods (top 6 by quantity)
 - **Available Foods**: All available food items shown in cards, sortable by expiry date, searchable by name, with toggle between 2-column and 3-column layouts
-- **Add Food** *(Private)*: Form to add new food
-- **Manage My Foods** *(Private)*: View, update, or delete foods added by the logged-in user
-- **My Food Requests** *(Private)*: View all food requests made by the user
+- **Add Food**: Form to add new food
+- **Manage My Foods**: View, update, or delete foods added by the logged-in user
+- **My Food Requests**: View all food requests made by the user
 - **Food Details**: View full food details and request it via a modal form
 
 ### 📦 Food Operations (CRUD)
