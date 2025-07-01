@@ -79,7 +79,7 @@ const Update = () => {
                   defaultValue={oldData?.name}
                   required
                   placeholder="e.g., Fresh Apples"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none placeholder-gray-400 text-gray-700"
                 />
               </div>
 
@@ -93,7 +93,7 @@ const Update = () => {
                   defaultValue={oldData?.img}
                   required
                   placeholder="https://example.com/image.jpg"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none placeholder-gray-400 text-gray-700"
                 />
               </div>
 
@@ -107,7 +107,7 @@ const Update = () => {
                   defaultValue={oldData?.quantity}
                   min="1"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none placeholder-gray-400 text-gray-700"
                 />
               </div>
 
@@ -120,7 +120,7 @@ const Update = () => {
                   name="expire"
                   defaultValue={oldData?.expire}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none placeholder-gray-400 text-gray-700"
                 />
               </div>
 
@@ -133,7 +133,7 @@ const Update = () => {
                   name="location"
                   defaultValue={oldData?.location}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none placeholder-gray-400 text-gray-700"
                 />
               </div>
 
@@ -145,7 +145,7 @@ const Update = () => {
                   name="notes"
                   defaultValue={oldData?.notes}
                   rows="3"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:outline-none placeholder-gray-400 text-gray-700"
                 />
               </div>
             </div>
