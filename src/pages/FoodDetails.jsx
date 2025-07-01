@@ -107,9 +107,12 @@ const FoodDetails = () => {
   };
 
   return (
+ <div className='bg-gradient-to-b from-[#fffaf5] to-white '>
 
 
-    <div className="max-w-4xl mx-auto px-4 py-8">
+
+
+<div className="max-w-4xl mx-auto px-4 py-8 ">
       {/* Breadcrumb */}
       <nav className="flex mb-6" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-2">
@@ -197,16 +200,16 @@ const FoodDetails = () => {
           {/* Action button */}
           <div className="flex justify-center">
             <button
-              className={` btn w-full md:w-auto px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg text-center transition duration-300 hover:shadow-lg hover:-translate-y-1`}
+              className={` btn w-full md:w-auto px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg text-center transition duration-300 hover:shadow-lg hover:-translate-y-1 border-0`}
               onClick={() => modalOpen()}
             >
               Request This Food
             </button>
 
             {/* Modal */}
-            <dialog id="my_modal_1" className="modal modal-bottom sm:modal-middle">
-              <div className="modal-box max-w-full w-full sm:max-w-md">
-                <h3 className="font-bold text-lg md:text-xl mb-4">Request Food: {food.name}</h3>
+            <dialog id="my_modal_1" className="modal modal-bottom sm:modal-middle bg-white">
+              <div className="modal-box max-w-full w-full sm:max-w-md bg-white">
+                <h3 className="font-bold text-lg md:text-xl mb-4 text-black">Request Food: {food.name}</h3>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-4">
@@ -220,7 +223,7 @@ const FoodDetails = () => {
                         name="name"
                         value={food.name}
                         disabled
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                       />
                     </div>
 
@@ -235,7 +238,7 @@ const FoodDetails = () => {
                         name="foodImg"
                         value={food.img}
                         disabled
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                       />
                     </div>
 
@@ -251,7 +254,7 @@ const FoodDetails = () => {
                         value={food._id}
 
                         disabled
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                       />
 
 
@@ -269,7 +272,7 @@ const FoodDetails = () => {
                           name="donatorName"
                           value={food.userName}
                           disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                         />
                       </div>
                       <div>
@@ -281,7 +284,7 @@ const FoodDetails = () => {
                           name="donatorEmail"
                           value={food.userEmail}
                           disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                         />
                       </div>
                     </div>
@@ -296,7 +299,7 @@ const FoodDetails = () => {
                           name="userEmail"
                           value={user?.email || ''}
                           disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                         />
                       </div>
                       <div>
@@ -307,7 +310,7 @@ const FoodDetails = () => {
                           name='reqDate'
                           value={dayjs().format('MMMM D, YYYY')}
                           disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                         />
                       </div>
                     </div>
@@ -327,7 +330,7 @@ const FoodDetails = () => {
                           name="pickUpLocation"
                           value={food.location}
                           disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                         />
                       </div>
                       {/* expire data  */}
@@ -340,7 +343,7 @@ const FoodDetails = () => {
                           name='expireDate'
                           value={expireDate.format('MMMM D, YYYY')}
                           disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition placeholder-gray-400 text-gray-700"
                         />
                       </div>
 
@@ -354,7 +357,7 @@ const FoodDetails = () => {
                         name="notes"
                         placeholder="Allergies, special instructions, etc."
                         rows="3"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-0 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition  placeholder-gray-400 text-gray-700"
                       />
                     </div>
                   </div>
@@ -386,6 +389,19 @@ const FoodDetails = () => {
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+ </div>
+
+    
   );
 };
 

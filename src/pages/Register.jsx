@@ -107,7 +107,7 @@ navigate("/");
 
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-[5%]">
+    <section className="min-h-screen flex items-center justify-center px-4 py-[5%] bg-gradient-to-b from-[#fffaf5] to-white">
       <div className="w-full max-w-md p-8 bg-white shadow-xl rounded-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#ff6d03] ">
           Register
@@ -121,7 +121,7 @@ navigate("/");
             <input
               name="name"
               type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03] text-gray-700"
               placeholder="Enter your name"
               required
             />
@@ -134,7 +134,7 @@ navigate("/");
             <input
               name="email"
               type="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03] text-gray-700 placeholder-gray-400"
               placeholder="Enter your email"
               required
             />
@@ -147,7 +147,7 @@ navigate("/");
             <input
               name="photoUrl"
               type="url"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03] text-gray-700 placeholder-gray-400"
               placeholder="Link to your photo"
               required
             />
@@ -160,7 +160,7 @@ navigate("/");
             <input
               name="password"
               type="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff6d03] text-gray-700 placeholder-gray-400"
               placeholder="Enter your password"
               required
             />
@@ -187,7 +187,7 @@ navigate("/");
           </p>
           <button
             onClick={registerGoogle}
-            className="w-full flex items-center justify-center gap-2 py-2 border border-[#ff6d03] rounded-md hover:bg-gray-100 transition"
+            className="w-full flex items-center justify-center gap-2 py-2 border border-[#ff6d03] rounded-md hover:bg-gray-100 transition text-gray-700"
           >
             <FcGoogle size={20} />
             <span>Continue with Google</span>

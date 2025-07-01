@@ -15,10 +15,10 @@ const Banner = () => {
 
   const { ref, inView } = useInView({ triggerOnce: true });
   return (
-    <div>
+    <div >
       {/* Banner Section */}
       <div
-        className="w-full grid lg:grid-cols-2 px-[5%] bg-cover bg-center text-white min-h-[90vh] pt-10 pb-10 lg:pb-32"
+        className="w-full grid lg:grid-cols-2 px-[5%] bg-cover bg-center text-white min-h-[90vh] pt-10 pb-10 lg:pb-32 "
         style={{
           backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(${bannerImg})`,
         }}
@@ -70,7 +70,11 @@ const Banner = () => {
       </div>
 
       {/* Stats Section */}
-      <div className='mx-[5%] z-10 mt-6  lg:-mt-20 relative bg-white rounded-lg shadow-xl p-5 xl:p-7 ' ref={ref}>
+
+<div className='mx-[5%]  mt-6  lg:-mt-20 relative '>
+
+
+  <div className=' bg-white rounded-lg shadow-xl p-5 xl:p-7 z-10' ref={ref}>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center items-center'>
           {/* Stat Card 1 */}
           <div>
@@ -102,12 +106,21 @@ const Banner = () => {
           <div className='bg-[#ff6d03] text-white rounded-xl p-4 flex flex-col justify-center items-center gap-2'>
             <hr className="w-1/3 border-t-2 border-white" />
             <h1 className='text-xl font-semibold'>Our Goal is to Help Poor People</h1>
-            <p className='flex items-center gap-1 font-medium'>
-              <FaArrowRightLong /> Become Volunteer
-            </p>
+
+                
+
+
+            
           </div>
         </div>
       </div>
+
+
+
+
+</div>
+
+      
     </div>
   );
 };

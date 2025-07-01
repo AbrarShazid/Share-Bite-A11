@@ -13,10 +13,10 @@ const Footer = () => {
 
 
     return (
-        <section className="py-8  sm:pt-10 lg:pt-12 text-white bg-black/60">
+        <section className="py-8  sm:pt-10 lg:pt-12 text-white bg-[#666666]">
     <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="grid  md:col-span-3  gap-y-6 md:gap-y-10 lg:gap-y-16 gap-x-12                grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-            <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
+        <div className="grid  md:items-center    gap-y-6  gap-x-12                grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 ">
+            <div className="col-span-2 md:col-span-3 lg:col-span-3 lg:pr-8 ">
                <div className='flex items-center gap-2'>
                  <img className="w-10 h-10 rounded-full" src={logo} alt="" />
                   <h1 className="font-bold text-2xl text-white flex items-center">
@@ -24,9 +24,9 @@ const Footer = () => {
             </h1>
                </div>
 
-                <p className="text-base leading-relaxed  mt-7">Connecting communities through surplus food sharing. <br /> Reduce waste. Share <span className='text-[#ff6d03] font-bold'>hope</span>.</p>
+                <p className="text-base leading-relaxed  mt-4">Connecting communities through surplus food sharing. <br /> Reduce waste. Share <span className='text-[#ff6d03] font-bold'>hope</span>.</p>
 
-                <ul className="flex items-center space-x-3 mt-9">
+                <ul className="flex items-center space-x-3 mt-4">
                     <li>
                         <a href="https://x.com/" target='_blank' title="" className="flex items-center justify-center text-white transition-all duration-200 bg-gray-800 rounded-full w-7 h-7 hover:bg-blue-600 ">
                             <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -63,6 +63,9 @@ const Footer = () => {
 
        
 
+
+
+{/* 
             <div className=''>
                 <p className="text-2xl font-semibold tracking-widest ">Help</p>
 
@@ -83,9 +86,9 @@ const Footer = () => {
                         <a href="#" > Privacy Policy </a>
                     </li>
                 </ul>
-            </div>
+            </div> */}
 
-            <div className="col-span-2 md:col-span-1 lg:col-span-2 lg:pl-8">
+            <div className="col-span-2 md:col-span-2 lg:col-span-3 lg:pl-8 ">
                 <p className="text-2xl font-semibold tracking-widest  ">Subscribe to newsletter</p>
 
                 <form onSubmit={newsLetter} className="mt-6">

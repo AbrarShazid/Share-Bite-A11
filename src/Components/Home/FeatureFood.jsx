@@ -18,7 +18,7 @@ const FeatureFood = () => {
   if (error) return <p className="text-center text-red-500">Something went wrong.</p>;
 
   return (
-    <section className="px-[5%] py-12 bg-gradient-to-b from-[#fffaf5] to-white">
+    <section className="px-[5%] -mt-20 py-32 bg-gradient-to-b from-[#fffaf5] to-white">
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold text-[#ff6d03]">Featured Foods</h2>
         <p className="text-gray-600 mt-2">Top shared meals based on quantity</p>

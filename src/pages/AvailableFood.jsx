@@ -36,14 +36,14 @@ const AvailableFood = () => {
   if (isLoading) return <LoadingSpinner />;
 
   if (error) return (
-    <div className="mt-8 text-2xl font-semibold text-red-600 text-center">
+    <div className="  mt-8 text-2xl font-semibold text-red-600 text-center">
       Error fetching data.
     </div>
   );
 
   return (
-    <div className="px-[3%] mb-[2%]">
-      <div className="my-5 text-center">
+    <div className="px-[3%] pb-[2%] bg-gradient-to-b from-[#fffaf5] to-white">
+      <div className="py-5 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
           Available <span className="text-orange-500">Food</span> Donations
         </h2>
@@ -52,7 +52,7 @@ const AvailableFood = () => {
         </p>
       </div>
 
-      {/* Search and View Controls */}
+    
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         {/* Search Bar */}
         <div className="relative w-full md:w-64">
@@ -61,7 +61,7 @@ const AvailableFood = () => {
             placeholder="Search food..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-500 placeholder-gray-400 text-gray-700"
           />
          <IoIosSearch className="absolute left-3 top-3 h-5 w-5 text-gray-400"  />
         </div>
@@ -73,21 +73,21 @@ const AvailableFood = () => {
               onClick={() => setColumns(2)}
               className={`px-3 py-1 rounded-md ${columns === 2 ? 'bg-white shadow-sm' : ''}`}
             >
-              <TbColumns2 className='w-5 h-5' />
+              <TbColumns2 className='w-5 h-5 text-gray-700' />
             </button>
             <button 
               onClick={() => setColumns(3)}
               className={`px-3 py-1 rounded-md ${columns === 3 ? 'bg-white shadow-sm' : ''}`}
             >
-              <TbColumns3 className='w-5 h-5' />
+              <TbColumns3 className='w-5 h-5 text-gray-700' />
             </button>
           </div>
 
           {/* Sort Dropdown */}
-          <div className="relative">
+          <div className="relative ">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="btn m-1 flex items-center gap-1"
+              className="btn m-1 flex items-center gap-1 bg-white text-gray-700 border-0"
             >
               Sort By
               <svg 
@@ -101,11 +101,11 @@ const AvailableFood = () => {
             </button>
 
             {isDropdownOpen && (
-              <ul className="absolute md:right-0 z-10 mt-1 w-40 bg-white shadow-lg rounded-md border border-gray-200">
+              <ul className="absolute md:right-0 z-10 mt-1 w-40 bg-white shadow-lg rounded-md border  border-gray-200">
                 <li>
                   <button 
                     onClick={() => handleSort("expire-asc")}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-700"
                   >
                     Expire Early
                   </button>
@@ -113,7 +113,7 @@ const AvailableFood = () => {
                 <li>
                   <button 
                     onClick={() => handleSort("expire-desc")}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-700"
                   >
                     Expire Later
                   </button>
@@ -124,12 +124,12 @@ const AvailableFood = () => {
         </div>
       </div>
 
-      {/* Food Grid - columns state used for class but no actual functionality */}
+     
       <div className={`grid gap-8 ${columns === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'}`}>
         {foods.map((food) => (
           <div
             key={food._id}
-            className="bg-white p-6 rounded-2xl shadow-md border border-[#ff6d0332]"
+            className="bg-white p-6 rounded-2xl  shadow-md border border-[#ff6d0332] grid"
           >
             <div className="relative overflow-hidden rounded-xl h-48 mb-4">
               <img
@@ -149,7 +149,7 @@ const AvailableFood = () => {
                 📍 {food.location}
               </span>
             </div>
-            <div className="flex items-center text-sm text-gray-500 mb-2">
+            <div className="flex items-center text-sm text-gray-500 mb-2 ">
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
